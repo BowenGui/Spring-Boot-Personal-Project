@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search</title>
+    <link rel="stylesheet" href="../static/styles.css" th:href ="styles.css"/>
+</head>
+
+<body>
+	<p> This is the search page. </p>
+
+    <div th:text="${error_message}"></div>
+
+    <form action="result.html" method="GET" th:action = "@{/search}" th:method = "POST">
+      Search: <br/>
+      <input type="text" name="description"/><br/>
+      <input type="submit" value="search here!"/>
+    </form>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</body>
+</html>

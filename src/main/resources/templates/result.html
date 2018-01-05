@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="../static/styles.css" th:href ="styles.css" />
+</head>
+
+<body>
+
+<h1 th:text = "${searchQuery}">query</h1>
+
+<div th:each = "searchResult : ${searchResults}">
+  <h1 th:text="${searchResult.storeName}">store name</h1>
+  <!--<p th:inline="text">Page Number: [[${searchResult.pageNumber}]]!</p> -->
+  <!--<p th:text= "|Page number: ${searchResult.pageNumber}|"></p> -->
+  <p th:text="'Page Number: ' + ${searchResult.pageNumber}"></p> <!--the best way! to do in inline -->
+  <form action="result.html" method="GET" th:action="@{/result}" th:method = "POST">
+    <input type="text" name= "store" value="" th:value="${searchResult.storeName}"/> <!--todo: hidden -->
+    <input type="submit" name = "previous" value="previous page"/>
+    <input type="submit" name = "next" value="next page"/>
+  </form>
+  
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+    <tr th:each = "item : ${searchResult.currentPage()}">
+      <td th:text = "${item.itemName}">Alfreds Futterkiste</td>
+      <td th:text = "${item.description}">Maria Anders</td>
+      <td th:text = "${item.price}">Germany</td>
+    </tr>
+  </table>
+
+</div>
+
+<form action="search.html" method="GET" th:action="@{/search}" th:method = "POST" >
+  <input type="submit" value="back to search"/>
+</form>
+
+</body>
